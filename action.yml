@@ -1,6 +1,6 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'semver-action'
+description: 'Semantic Versioning (SemVer) Autoincrement Based on Tag Value'
+author: 'Andrii Ivanov'
 
 # Define your inputs here.
 inputs:
