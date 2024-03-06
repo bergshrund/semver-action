@@ -1,4 +1,5 @@
 const core = require('@actions/core')
+const semver = require('./semver')
 
 /**
  * The main function for the action.
@@ -14,7 +15,7 @@ async function run() {
     core.debug(`Checking ${repository} repository ...`)
 
     // Set outputs for other workflow steps to use
-    core.setOutput('version', version)
+    core.setOutput('version', semver.getCurrentVersion())
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)

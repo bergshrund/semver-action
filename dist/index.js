@@ -2726,6 +2726,7 @@ exports["default"] = _default;
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(186)
+const semver = __nccwpck_require__(225)
 
 /**
  * The main function for the action.
@@ -2741,7 +2742,7 @@ async function run() {
     core.debug(`Checking ${repository} repository ...`)
 
     // Set outputs for other workflow steps to use
-    core.setOutput('version', version)
+    core.setOutput('version', semver.getCurrentVersion())
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
@@ -2751,6 +2752,20 @@ async function run() {
 module.exports = {
   run
 }
+
+
+/***/ }),
+
+/***/ 225:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(186)
+
+function getCurrentVersion() {
+  return '0.0.0'
+}
+
+module.exports = { getCurrentVersion }
 
 
 /***/ }),
