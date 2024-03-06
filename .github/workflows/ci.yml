@@ -57,7 +57,8 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 1000
+          repository: bergshrund/helm-repo
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Output
         id: output
