@@ -29021,7 +29021,7 @@ async function getLastVersion() {
     ref: 'tags/'
   })
 
-  core.debug(refs)
+  core.debug(`Result: ${refs}`)
   return '0.0.0'
 }
 
