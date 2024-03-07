@@ -7,15 +7,10 @@ const semver = require('./semver')
  */
 async function run() {
   try {
-    const version = '0.0.0'
-    const repository = core.getInput('repository', { required: true })
-    const token = core.getInput('github_token', { required: true })
-
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Checking ${repository} repository ...`)
+    const lastVersion = await semver.getLastVersion()
 
     // Set outputs for other workflow steps to use
-    core.setOutput('version', semver.getCurrentVersion())
+    core.setOutput('version', lastVersion)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
