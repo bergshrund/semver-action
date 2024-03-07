@@ -32300,6 +32300,9 @@ async function getLastVersion() {
     ref: 'tags/'
   })
 
+  core.debug(`Context repo: ${context.repo.repo}`)
+  core.debug(`Requiested repo: ${repository}`)
+
   const versions = refs
     .map(ref =>
       semver.parse(ref.ref.replace(/^refs\/tags\//g, ''), { loose: true })
