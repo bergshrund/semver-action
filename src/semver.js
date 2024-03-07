@@ -3,6 +3,12 @@ const github = require('@actions/github')
 const semver = require('semver')
 const context = github.context
 
+function increment(versionNumber, releaseType) {
+  const version = semver.parse(versionNumber) || new semver.SemVer('0.0.0')
+  version.inc(releaseType)
+  return version
+}
+
 async function getLastVersion() {
   const repository = core.getInput('repository') || context.repo.repo
   const token = core.getInput('github_token', { required: true })
