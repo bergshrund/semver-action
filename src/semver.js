@@ -40,4 +40,4 @@ async function getLastVersion() {
   }
 }
 
-module.exports = { getLastVersion }
+module.exports = { getLastVersion, increment }
