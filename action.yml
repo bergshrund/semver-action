@@ -6,7 +6,7 @@ author: 'Andrii Ivanov'
 inputs:
   repository:
     description: 'Repository name'
-    required: true
+    required: false
   github_token:
     description:
       'Token to get tags from the repo. Pass in using `secrets.GITHUB_TOKEN`.'
