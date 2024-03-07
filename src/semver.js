@@ -1,6 +1,6 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
-
+const semver = require('semver')
 const context = github.context
 
 async function getLastVersion() {
@@ -15,8 +15,20 @@ async function getLastVersion() {
     ref: 'tags/'
   })
 
-  core.debug(`Result: ${refs}`)
-  return '0.0.0'
+  const versions = refs
+    .map(ref =>
+      semver.parse(ref.ref.replace(/^refs\/tags\//g, ''), { loose: true })
+    )
+    .filter(version => version !== null)
+    .sort((a, b) =>
+      semver.rcompare(a?.version || '0.0.0', b?.version || '0.0.0')
+    )
+
+  if (versions[0] != null) {
+    return versions[0]
+  } else {
+    return new semver.SemVer('0.0.0')
+  }
 }
 
 module.exports = { getLastVersion }
