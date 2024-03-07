@@ -32266,7 +32266,7 @@ async function run() {
     const lastVersion = await semver.getLastVersion()
 
     // Set outputs for other workflow steps to use
-    core.setOutput('version', lastVersion)
+    core.setOutput('version', lastVersion?.version)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
