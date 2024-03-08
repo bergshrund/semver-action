@@ -53,12 +53,12 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Test Local Action
-        id: test-action
+      - name: Test SemVer incrementation
+        id: semver-action
         uses: ./
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          semver: 0.0.0
 
-      - name: Print Output
+      - name: Print incremented version
         id: output
-        run: echo "${{ steps.test-action.outputs.version }}"
+        run: echo "${{ steps.semver-action.outputs.version }}"

@@ -4,13 +4,21 @@ author: 'Andrii Ivanov'
 
 # Define your inputs here.
 inputs:
+  semver:
+    description: 'Last semver value'
+    required: true
+    default: '0.0.0'
   repository:
     description: 'Repository name'
     required: false
   github_token:
     description:
       'Token to get tags from the repo. Pass in using `secrets.GITHUB_TOKEN`.'
+    required: false
+  releaseType:
     required: true
+    description: 'Release type: major, minor, patch'
+    default: 'patch'
 
 # Define your outputs here.
 outputs:

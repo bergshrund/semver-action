@@ -3,14 +3,21 @@ const semver = require('./semver')
 
 /**
  * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
+ * @returns {Promise} Resolves when the action is complete.
  */
 async function run() {
   try {
-    const lastVersion = await semver.getLastVersion()
+    let version
+    const semVer = core.getInput('semver', { required: true })
+    const releaseType = core.getInput('releaseType', { required: true })
+    const token = core.getInput('github_token') || null
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('version', lastVersion?.version)
+    if (token !== null) {
+      version = await semver.getLastVersion()
+    } else {
+      version = await semver.increment(semVer, releaseType)
+    }
+    core.setOutput('version', version?.version)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
