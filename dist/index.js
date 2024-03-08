@@ -32271,7 +32271,7 @@ async function run() {
     if (token !== null) {
       version = await semver.getLastVersion()
     } else {
-      version = semver.increment(semVer, releaseType)
+      version = await semver.increment(semVer, releaseType)
     }
     core.setOutput('version', version?.version)
   } catch (error) {
@@ -32295,7 +32295,7 @@ const github = __nccwpck_require__(5438)
 const semver = __nccwpck_require__(1383)
 const context = github.context
 
-function increment(versionNumber, releaseType) {
+async function increment(versionNumber, releaseType) {
   const version = semver.parse(versionNumber) || new semver.SemVer('0.0.0')
   version.inc(releaseType)
   return version
@@ -32313,8 +32313,7 @@ async function getLastVersion() {
     ref: 'tags/'
   })
 
-  core.debug(`Context repo: ${context.repo.repo}`)
-  core.debug(`Requiested repo: ${repository}`)
+  core.debug(`Source repo: ${repository}`)
 
   const versions = refs
     .map(ref =>

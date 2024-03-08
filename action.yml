@@ -17,8 +17,7 @@ inputs:
     required: false
   releaseType:
     required: true
-    description:
-      'Uses this if any labels cannot be found in the commit messages.'
+    description: 'Release type: major, minor, patch'
     default: 'patch'
 
 # Define your outputs here.

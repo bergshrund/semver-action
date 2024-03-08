@@ -3,7 +3,7 @@ const github = require('@actions/github')
 const semver = require('semver')
 const context = github.context
 
-function increment(versionNumber, releaseType) {
+async function increment(versionNumber, releaseType) {
   const version = semver.parse(versionNumber) || new semver.SemVer('0.0.0')
   version.inc(releaseType)
   return version
@@ -21,8 +21,7 @@ async function getLastVersion() {
     ref: 'tags/'
   })
 
-  core.debug(`Context repo: ${context.repo.repo}`)
-  core.debug(`Requiested repo: ${repository}`)
+  core.debug(`Source repo: ${repository}`)
 
   const versions = refs
     .map(ref =>

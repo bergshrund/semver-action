@@ -15,7 +15,7 @@ async function run() {
     if (token !== null) {
       version = await semver.getLastVersion()
     } else {
-      version = semver.increment(semVer, releaseType)
+      version = await semver.increment(semVer, releaseType)
     }
     core.setOutput('version', version?.version)
   } catch (error) {
